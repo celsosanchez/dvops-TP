@@ -13,15 +13,14 @@
         dest: /root/studentList
         version: master
 
-    # - name: Create and start services
-    #   docker_compose:
-    #     project_src: /root/studentList
-    #   register: output
+ 
 
-    # - debug:
-    #     var: output
-    
-
+    - name:  ensure insecure registry 
+      become: True
+      shell:
+        cmd: 'printf "{\n  "insecure-registries" : ["192.168.31.21:5000"] \n}"| cat>/etc/docker/daemon.json'
+        chdir: /root/studentList/
+ 
     - name:  start docker-compose 
       become: True
       shell:
