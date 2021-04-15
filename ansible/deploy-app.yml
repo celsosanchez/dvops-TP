@@ -9,7 +9,7 @@
 
     - name: clone studentlist repo 
       git:
-        repo: http://192.168.31.148/root/studentList
+        repo: http://192.168.31.148/root/studentList.git
         dest: /root/studentList
         version: master
 
