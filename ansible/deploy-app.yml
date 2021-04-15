@@ -9,10 +9,14 @@
 
     - name: clone studentlist repo 
       git:
-        repo: http://192.168.31.148/root/studentList.git
+        repo: http://192.168.31.148/root/studentList
         dest: /root/studentList
         version: master
 
+    - name: Create and start services
+      docker_compose:
+        project_src: /root/studentList
+      register: output
           
     # - name: Deploy 4dvop-haproxy
     #   docker_container:
