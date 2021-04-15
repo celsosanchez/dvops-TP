@@ -38,7 +38,7 @@ sh """
 ansible app -i $WORKSPACE/ansible/hosts -m ping 
  """		// Shell build step
 sh """ 
-#docker pull php:apache
+docker pull php:apache
 docker tag php:apache 192.168.31.21:5000/php:apache
 docker push 192.168.31.21:5000/php:apache 
  """		// Shell build step
