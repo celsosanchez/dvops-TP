@@ -15,3 +15,7 @@
 192.168.31.21
 192.168.31.148
 192.168.31.207
+
+[app:vars]
+ansible_user=root
+ansible_password=celso
