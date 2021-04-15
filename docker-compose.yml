@@ -1,7 +1,7 @@
 version: "3"
 services:
  website:
-  image: php:apache
+  image: 192.168.31.21:5000/php:apache
   environment:
    - USERNAME=toto
    - PASSWORD=python
