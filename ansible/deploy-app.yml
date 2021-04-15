@@ -16,7 +16,7 @@
     - name:  ensure insecure registry 
       become: True
       shell:
-        cmd: 'printf "{\n  "insecure-registries" : ["192.168.31.21:5000"] \n}"| cat>/etc/docker/daemon.json'
+        cmd: 'printf "{\n  \"insecure-registries\" : [\"192.168.31.21:5000\"] \n}\n"| cat>/etc/docker/daemon.json'
         chdir: /root/studentList/
  
     - name:  reload docker config 
