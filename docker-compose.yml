@@ -1,19 +1,48 @@
-version: "3"
-services:
- website:
-  image: 192.168.31.21:5000/php:apache
-  environment:
-   - USERNAME=toto
-   - PASSWORD=python
-  volumes:
-   - .//website:/var/www/html 
-  depends_on:
-   - api
-  ports:
-   - 80:80
- api:
-  image: 192.168.31.21:5000/apiexam
-  volumes:
-   - ./simple_api/student_age.json:/data/student_age.json
-  ports:
-   - 5000:5000
+---
+- hosts: app
+  become: true
+  tasks:
+    - name: install git 
+      yum:
+        name: git
+        state: latest
+
+    - name: clone studentlist repo 
+      git:
+        repo: http://192.168.31.148/root/studentList.git
+        dest: /root/studentList
+        version: master
+
+    - name:  ensure insecure registry 
+      become: True
+      shell:
+        cmd: 'printf "{\n  \"insecure-registries\" : [\"192.168.31.21:5000\"] \n}\n"| cat>/etc/docker/daemon.json'
+        chdir: /root/studentList/
+ 
+    - name:  reload docker config 
+      become: True
+      shell:
+        cmd: 'systemctl daemon-reload'
+  
+    - name:  restart docker 
+      become: True
+      shell:
+        cmd: 'systemctl restart docker'
+ 
+    - name:  giving time for docker restart  
+      become: True
+      shell:
+        cmd: 'sleep 3'
+  
+    - name:  start docker-compose 
+      become: True
+      shell:
+        cmd: "docker-compose up "
+        chdir: /root/studentList/
+ 
+    - name:  echo docker-compose end 
+      become: True
+      shell:
+        cmd: 'echo "ended " '
+   
+ 
