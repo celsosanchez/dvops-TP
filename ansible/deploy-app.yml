@@ -13,11 +13,22 @@
         dest: /root/studentList
         version: master
 
-    - name: Create and start services
-      docker_compose:
-        project_src: /root/studentList
-      register: output
-          
+    # - name: Create and start services
+    #   docker_compose:
+    #     project_src: /root/studentList
+    #   register: output
+
+    # - debug:
+    #     var: output
+    
+
+    - name:  start docker-compose 
+      become: True
+      shell:
+        cmd: "docker-compose up "
+        chdir: /root/studentList/
+
+
     # - name: Deploy 4dvop-haproxy
     #   docker_container:
     #     name: haproxy
