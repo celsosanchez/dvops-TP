@@ -33,13 +33,18 @@
     #   become: True
     #   shell:
     #     cmd: 'sleep 3'
-  
+    - name: Create and start services
+      docker_compose:
+        project_src: /root/studentList/
+
     - name:  start docker-compose 
+      become: True
       shell:
         cmd: "docker-compose up "
         chdir: /root/studentList/
  
     - name:  echo docker-compose end 
+      become: True
       shell:
         cmd: 'echo "ended " '
    
