@@ -2,6 +2,11 @@
 - hosts: app
   become: true
   tasks:
+    - name: install git 
+      yum:
+        name: git
+        state: latest
+
     - name: clone studentlist repo 
       git:
         repo: http://192.168.31.148/root/studentList
