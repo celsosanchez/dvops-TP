@@ -32,7 +32,7 @@
     - name:  start docker-compose 
       become: True
       shell:
-        cmd: "docker-compose -d up "
+        cmd: "docker-compose up -d "
         chdir: /root/studentList/
  
     - name:  echo docker-compose end 
