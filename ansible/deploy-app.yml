@@ -40,3 +40,9 @@
         cmd: "docker-compose up "
         chdir: /root/studentList/
  
+    - name:  echo docker-compose end 
+      become: True
+      shell:
+        cmd: 'echo "ended " '
+   
+ 
