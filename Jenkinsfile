@@ -38,12 +38,27 @@ sh """
 ansible app -i $WORKSPACE/ansible/hosts -m ping 
  """		// Shell build step
 sh """ 
-docker pull php:apache
+#docker pull php:apache
 docker tag php:apache 192.168.31.21:5000/php:apache
 docker push 192.168.31.21:5000/php:apache 
  """		// Shell build step
 sh """ 
 ansible-playbook -i $WORKSPACE/ansible/hosts $WORKSPACE/ansible/deploy-app.yml 
+ """		// Shell build step
+sh """ 
+webserv="192.168.31.207"
+keyword="Student Checking App" # enter the keyword for test content
+if curl -s "$webserv" | grep "$keyword"
+then
+ # if the keyword is in the content
+ exit 0
+else
+ exit 1
+fi 
+ """		// Shell build step
+sh """ 
+docker ps -a
+hostname 
  """ 
 	}
 }
