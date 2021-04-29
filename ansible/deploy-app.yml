@@ -13,10 +13,10 @@
         dest: /root/studentList
         version: master
     
-    -name: clear previous builds
+    - name: clear previous builds
       shell: docker rm -f studentlist_api_1
     
-    -name: clear previous builds
+    - name: clear previous builds
       shell: docker rm -f studentlist_website_1
  
     - name:  start docker-compose 
