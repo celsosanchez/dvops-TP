@@ -15,5 +15,4 @@ services:
   image: 192.168.31.21:5000/apiexam
   volumes:
    - ./simple_api/student_age.json:/data/student_age.json
-  ports:
-   - 5005:5000
+
