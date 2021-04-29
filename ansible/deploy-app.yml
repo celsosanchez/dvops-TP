@@ -12,22 +12,12 @@
         repo: http://192.168.31.148/root/studentList.git
         dest: /root/studentList
         version: master
-
-    # - name:  ensure insecure registry 
-    #   become: True
-    #   shell:
-    #     cmd: 'printf "{\n  \"insecure-registries\" : [\"192.168.31.21:5000\"] \n}\n"| cat>/etc/docker/daemon.json'
-    #     chdir: /root/studentList/
- 
-    # - name:  reload docker config 
-    #   become: True
-    #   shell:
-    #     cmd: 'systemctl daemon-reload'
-  
-    # - name:  restart docker 
-    #   become: True
-    #   shell:
-    #     cmd: 'systemctl restart docker'
+    
+    -name: clear previous builds
+      shell: docker rm -f studentlist_api_1
+    
+    -name: clear previous builds
+      shell: docker rm -f studentlist_website_1
  
     - name:  start docker-compose 
       become: True
